@@ -20,6 +20,8 @@ echo "generating supervisor config..."
 cd /opt/vespene
 $PYTHON manage.py generate_supervisor --path /etc/vespene/supervisord.conf --workers "$WORKER_CONFIG" --executable=$PYTHON --source /opt/vespene
 
+# If using Linux, assume a basic production environment and set up accordingly
+if [ "$OSTYPE" == "linux-gnu" ]; then
 echo "creating init script..."
 # generate systemd init script
 cat > /etc/systemd/system/vespene.service << 'END_OF_SYSTEMD'
@@ -45,5 +47,8 @@ echo "starting the service..."
 systemctl daemon-reload
 systemctl start vespene.service
 systemctl enable vespene.service
-
 echo "Vespene is now running on port 8000 and also running workers: $WORKER_CONFIG"
+# Alert user that MacOS will default to being set up in developer mode.
+elif [ "$DISTRO" == "MacOS" ]; then
+    echo "Vespene is being setup in developer mode because you are using MacOS."
+fi
