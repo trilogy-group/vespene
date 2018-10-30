@@ -18,7 +18,13 @@ mkdir -p /var/log/vespene
 # generate the supervisor configuration
 echo "generating supervisor config..."
 cd /opt/vespene
-$PYTHON manage.py generate_supervisor --path /etc/vespene/supervisord.conf --workers "$WORKER_CONFIG" --executable=$PYTHON --source /opt/vespene --gunicorn "$GUNICORN_OPTS"
+$PYTHON manage.py generate_supervisor --path /etc/vespene/supervisord.conf --workers "$WORKER_CONFIG" --executable=$PYTHON --source=/opt/vespene --gunicorn "$GUNICORN_OPTS"
+
+if [ "$DISTRO" == "MacOS" ]; then
+   echo "you can start services with: supervisor -n -c /etc/vespene/supervisord.conf"
+   exit 0
+fi
+
 echo "creating init script..."
 # generate systemd init script
 cat > /etc/systemd/system/vespene.service << 'END_OF_SYSTEMD'
@@ -44,5 +50,3 @@ echo "starting the service..."
 systemctl daemon-reload
 systemctl start vespene.service
 systemctl enable vespene.service
-
-echo "Vespene is now running on port 8000 and also running workers: $WORKER_CONFIG"

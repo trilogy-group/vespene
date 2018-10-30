@@ -44,7 +44,6 @@ echo "configuring security..."
 # Using password auth is highly recommended as the workers also use database access.
 cat > "$CONFIG" <<'END_OF_CONF'
 local	all	$POSTUSER	ident
-local	all	$POSTUSER	md5
 host	all	all	0.0.0.0/0	md5
 END_OF_CONF
 
@@ -54,7 +53,7 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
     systemctl enable postgresql.service
     systemctl start postgresql.service
 elif [ "$DISTRO" == "MacOS" ]; then
-    sudo -u $POSTUSER brew services start postgresql
+    brew services start postgresql
 fi
 
 

@@ -57,6 +57,10 @@ If you are interested in working on Windows support, please let us know!
 For this first release, the "setup/" directory of a checkout includes setup scripts for CentOS7 and the latest Ubuntu LTS, which
 was "Bionic Beaver" at the time of writing this.
 
+There are basic setup scripts available for MacOS.  These will default to setting up Vespene in a developer state,
+i.e., no launchdaemon files or other similar service setup tasks.  The setup scripts for MacOS expect the presence
+of `Homebrew <https://brew.sh/>`_ in order to install Python3, supervisor, and PostgreSQL.
+
 Once you have the app running in production mode, you may wish to know how to work on it as a developer.
 For development setup instructions, see :ref:`development_setup`, which includes OS X development tips.
 Michael does a LOT of his development for Vespene on OS X and everything also works fine there.

@@ -52,6 +52,7 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
       PIP="/usr/bin/pip"
    fi
 elif [ -f /usr/local/bin/brew ]; then
+      echo "warning: OS X setup in this configuration is experimental"
       DISTRO="MacOS"
       PYTHON="/usr/local/bin/python3"
       PIP="/usr/local/bin/pip3"
