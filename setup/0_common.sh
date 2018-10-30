@@ -41,6 +41,10 @@ if [ "$OSTYPE" == "linux-gnu" ]; then
       PYTHON="/usr/bin/python"
       PIP="/usr/bin/pip"
    fi
+elif [ -f /usr/local/bin/brew ]; then
+      DISTRO="MacOS"
+      PYTHON="/usr/local/bin/python3"
+      PIP="/usr/local/bin/pip3"
 else
    echo "this OS may work with Vespene but we don't have setup automation for this just yet"
    DISTRO="?"
