@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+  vespene:
+    build: .
+    volumes:
+      - "./:/data"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "db"
+    command: /tmp/docker-run.sh
+    # command: python manage.py runserver 0.0.0.0:8000
+  db:
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=vespene
+      - POSTGRES_USER=vespene
+      - POSTGRES_DB=vespene
+      - PGPASSWORD=vespene
+    ports:
+      - "5432:5432"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+volumes:
+  db-data:
