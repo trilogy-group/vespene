@@ -1,0 +1,14 @@
+version: '3.2'
+services:  
+  trilogy-vespene:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - type: bind
+        source: ../../
+        target: /data
+    container_name: trilogy-vespene
+    ports: 
+      - "8000:8000"
+    network_mode: host

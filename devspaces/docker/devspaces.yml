@@ -1,0 +1,22 @@
+--- # devspaces.yml
+name: trilogy-vespene
+
+description: Development environment for Vespene App
+icon-file: vespenelogo.png
+
+docker-file: Dockerfile
+
+docker-build-includes: |
+  **/*
+
+ports:
+  - protocol: http
+    port-number: 8000
+    description: Web Listener
+
+sync-ignore: |
+  .git
+  .idea
+  **/__pycache__
+  .DS_Store
+  .data
